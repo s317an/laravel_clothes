@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\LineltemController;
 use App\Models\Product;
 
 /*
@@ -21,3 +22,10 @@ Route::controller(ProductController::class)->group(function(){
         Route::get('/product/{id}','show')->name('show');
     });
 });
+
+Route::controller(LineltemController::class)->group(function(){
+    Route::name('line_ltem.') -> group(function(){
+        Route::post('/line_ltem','create')->name('create');
+    });
+});
+

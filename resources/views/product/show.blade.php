@@ -15,7 +15,18 @@
             </div>
         </div>
         {{$product->description}}
+        <form method="post" action="{{route('line_ltem.create')}}">
+            @csrf
+            <input type="hidden" name="id" value="{{$product->id}}"/>
+            <div class="product_quantity">
+                <input type="number" name="quantity" min="1" value="1" require/>
+            </div>
+            <div class="product__btn-add-cart">
+                <button class="btn btn-outline-secondary">カートに追加する</button>
+            </div>
+        </form>
     </div>
+    <a href="{{route('product.index')}}">TOPへ戻る</a>
 </div>
 
 @endsection
