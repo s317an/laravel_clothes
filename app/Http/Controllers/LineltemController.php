@@ -15,10 +15,10 @@ class LineltemController extends Controller
             ->first();
 
         if($line_ltem){
-            $line_ltem->quantity += $request->input('puantity');
+            $line_ltem->quantity += $request->input('quantity');
             $line_ltem->save();
         } else{
-            LineLtem::created([
+            LineLtem::create([
                 'cart_id' => $cart_id,
                 'product_id' => $request->input('id'),
                 'quantity' => $request->input('quantity'),

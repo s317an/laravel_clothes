@@ -22,7 +22,7 @@
                 <input type="number" name="quantity" min="1" value="1" require/>
             </div>
             <div class="product__btn-add-cart">
-                <button class="btn btn-outline-secondary">カートに追加する</button>
+                <button type="submit" class="btn btn-outline-secondary">カートに追加する</button>
             </div>
         </form>
     </div>
