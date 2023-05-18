@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LineltemController;
+use App\Http\Controllers\CartController;
 use App\Models\Product;
 
 /*
@@ -26,6 +27,12 @@ Route::controller(ProductController::class)->group(function(){
 Route::controller(LineltemController::class)->group(function(){
     Route::name('line_ltem.') -> group(function(){
         Route::post('/line_ltem','create')->name('create');
+    });
+});
+
+Route::controller(CartController::class)->group(function(){
+    Route::name('cart.') -> group(function(){
+        Route::get('/cart','index')->name('index');
     });
 });
 

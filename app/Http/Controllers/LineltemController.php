@@ -25,6 +25,6 @@ class LineltemController extends Controller
             ]);
         }
 
-        return redirect(route('product.index'));
+        return redirect(route('cart.index'));
     }
 }
