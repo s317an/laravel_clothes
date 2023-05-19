@@ -27,4 +27,10 @@ class LineltemController extends Controller
 
         return redirect(route('cart.index'));
     }
+
+    public function delete(Request $request){
+        LineLtem::destroy($request->input('id'));
+
+        return redirect(route('cart.index'));
+    }
 }

@@ -27,12 +27,14 @@ Route::controller(ProductController::class)->group(function(){
 Route::controller(LineltemController::class)->group(function(){
     Route::name('line_ltem.') -> group(function(){
         Route::post('/line_ltem','create')->name('create');
+        Route::post('/line_ltem/delete','delete')->name('delete');
     });
 });
 
 Route::controller(CartController::class)->group(function(){
     Route::name('cart.') -> group(function(){
         Route::get('/cart','index')->name('index');
+        Route::get('/cart/checkout','checkout')->name('checkout');
     });
 });
 

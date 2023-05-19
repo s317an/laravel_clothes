@@ -6,9 +6,9 @@
 
 @section('content')
 
-<div class="contaner">
+<div class="container">
     <div class="cart__title">
-        Shoppong Cart
+        Shopping Cart
     </div>
     @if (count($line_ltems)>0)
         <div class="cart-wrapper">
@@ -26,14 +26,24 @@
                             <div class="card__total-price col-3 text-center">
                                 ¥{{number_format($ltem->price * $ltem->pivot->quantity)}}
                             </div>
+                            <form method="post" action="{{ route('line_ltem.delete') }}">
+                                @csrf
+                                <div class="card__btn-trash col-1">
+                                    <input type="hidden" name="id" value="{{ $ltem->pivot->id }}"/>
+                                    <button type="submit" class="fas fa-trash-alt"></button>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             @endforeach
         </div>
-        <div class="cart__sub-tolal">
+        <div class="cart__sub-total">
             小計：¥{{number_format($total_price)}}円
         </div>
+        <button onClick="location.href='{{route('cart.checkout')}}'" class="cart__purchase btn btn-primary">
+            購入する
+        </button>
         @else
         <div class="cart__empty">
             カートに商品が入っていません。
