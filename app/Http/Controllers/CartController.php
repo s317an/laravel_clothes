@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\Cart;
+use App\Models\LineLtem;
 
 class CartController extends Controller
 {
@@ -27,6 +28,10 @@ class CartController extends Controller
         $cart_id = Session::get('cart');
         $cart = Cart::find($cart_id);
 
+        if(count($cart->products) <= 0){
+            return redirect(route('cart.index'));
+        }
+
         $line_ltems = [];
         foreach($cart->products as $product){
             $line_ltem = [
@@ -47,14 +52,21 @@ class CartController extends Controller
         $session =\Stripe\Checkout\Session::create([
             'payment_method_types' => ['card'],
             'line_items'           => [$line_ltems],
-            'success_url'          => [route('product.index')],
-            'cancel_url'           => [route('cart.index')],
-            'mode'                 => ['payment'],
+            'success_url'          => route('cart.success'),
+            'cancel_url'           => route('cart.index'),
+            'mode'                 => 'payment',
         ]);
 
         return view('cart.checkout',[
             'session'   => $session,
             'publicKey' => env('STRIPE_PUBLIC_KEY'),
         ]);
+    }
+
+    public function success(){
+        $cart_id = Session::get('cart');
+        LineLtem::where('cart_id',$cart_id)->delete();
+
+        return redirect(route('product.index'));
     }
 }
